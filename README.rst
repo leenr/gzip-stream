@@ -48,7 +48,7 @@ with zlib and gzip decompression on-the-fly
         aws_access_key_id=AWS_ACCESS_KEY_ID,
     ) as client:
         response = await client.get_object(Bucket=BUCKET, Key='my_very_big_1tb_file.txt.gz')
-        async for decompressed_chunk in GzipAsyncReaderWrapper(response["Body"]), buf_size=2):
+        async for decompressed_chunk in GzipAsyncReaderWrapper(response["Body"])):
             await upload_client.upload_fileobj(decompressed_chunk)
 
 
