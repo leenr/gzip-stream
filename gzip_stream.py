@@ -102,17 +102,13 @@ class CompressedType(int, Enum):
 
 
 class BaseAsyncIteratorReader(BaseAsyncReader, abc.ABC):
-    async def __aiter__(self):
-        while True:
-            chunk = await self.read(BUFFER_SIZE)
-            if not chunk:
-                return
-            yield chunk
+    def __aiter__(self):
+        return self
 
     async def __anext__(self):
         chunk = await self.read(BUFFER_SIZE)
         if not chunk:
-            raise StopAsyncIteration(chunk)
+            raise StopAsyncIteration
         return chunk
 
 
