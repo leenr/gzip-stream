@@ -25,6 +25,33 @@ but wraps another stream and compress it on-the-fly.
 `GZIPCompressedStream` does not read entire stream, but instead read it
 by chunks, until compressed output size will not satisfy read size.
 
+`AsyncGZIPDecompressedStream` class can async read from another source
+with zlib and gzip decompression on-the-fly
+
+.. code-block:: python
+    # aiobotocore example
+
+    import aiobotocore
+
+    from gzip_stream import AsyncGZIPDecompressedStream
+
+    AWS_ACCESS_KEY_ID = "KEY_ID"
+    AWS_SECRET_ACCESS_KEY = "ACCESS_KEY"
+    BUCKET = "AWESOME_BUCKET"
+
+    upload_client = MyAsyncUploadClient()
+    session = aiobotocore.get_session()
+    async with session.create_client(
+        service_name="s3",
+        endpoint_url="s3_endpoint",
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+    ) as client:
+        response = await client.get_object(Bucket=BUCKET, Key='my_very_big_1tb_file.txt.gz')
+        async for decompressed_chunk in GzipAsyncReaderWrapper(response["Body"]), buf_size=2):
+            await upload_client.upload_fileobj(decompressed_chunk)
+
+
 Module works on Python ~= 3.5.
 
 Installation
