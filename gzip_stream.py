@@ -164,6 +164,6 @@ class AsyncGZIPDecompressedStream(BaseAsyncIteratorReader):
 
 
 __all__ = (
-    'GZIPCompressedStream',
     'AsyncGZIPDecompressedStream',
+    'GZIPCompressedStream',
 )
