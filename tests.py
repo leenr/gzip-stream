@@ -28,7 +28,7 @@ def test_basic(data):
 
 class FakeAsyncReader(BaseAsyncIteratorReader):
     def __init__(self, filename: Path):
-        self._fp = open(str(filename), "rb")
+        self._fp = open(str(filename), 'rb')
         self._lock = asyncio.Lock()
 
     async def read(self, size: int = BUFFER_SIZE):
@@ -40,7 +40,7 @@ class FakeAsyncReader(BaseAsyncIteratorReader):
 
 
 @pytest.mark.parametrize(
-    "expected",
+    'expected',
     [
         '', 't', 'test',
         Faker().text(4 * 1024),
@@ -50,19 +50,19 @@ class FakeAsyncReader(BaseAsyncIteratorReader):
          'fake text - ~4 KB', 'fake text - ~256 KB']
 )
 async def test_gzip_aiter_async_reader(expected, tmpdir):
-    tmp_file = tmpdir / "temp.txt"
-    with gzip.open(str(tmp_file), "wb") as f:
-        f.write(expected.encode("utf-8"))
+    tmp_file = tmpdir / 'temp.txt'
+    with gzip.open(str(tmp_file), 'wb') as f:
+        f.write(expected.encode('utf-8'))
 
     buffer = BytesIO()
     async for chunk in AsyncGZIPDecompressedStream(FakeAsyncReader(tmp_file)):
         buffer.write(chunk)
     buffer.seek(0)
-    assert buffer.read().decode("utf-8") == expected
+    assert buffer.read().decode('utf-8') == expected
 
 
 @pytest.mark.parametrize(
-    "buff_size",
+    'buff_size',
     [
         2,
         4,
@@ -74,11 +74,11 @@ async def test_gzip_aiter_async_reader(expected, tmpdir):
          '16 bytes', '1 KB']
 )
 async def test_buffer_gzip_async_reader(tmpdir, buff_size):
-    plain_text = "hello world" * 1000
+    plain_text = 'hello world' * 1000
 
-    tmp_file = tmpdir / "temp.txt"
-    with gzip.open(str(tmp_file), "wb") as f:
-        f.write(plain_text.encode("utf-8"))
+    tmp_file = tmpdir / 'temp.txt'
+    with gzip.open(str(tmp_file), 'wb') as f:
+        f.write(plain_text.encode('utf-8'))
 
     buffer = BytesIO()
     reader = AsyncGZIPDecompressedStream(FakeAsyncReader(tmp_file))
@@ -88,4 +88,4 @@ async def test_buffer_gzip_async_reader(tmpdir, buff_size):
             break
         buffer.write(chunk)
     buffer.seek(0)
-    assert buffer.read().decode("utf-8") == plain_text
+    assert buffer.read().decode('utf-8') == plain_text

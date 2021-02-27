@@ -119,14 +119,14 @@ class AsyncGZIPDecompressedStream(BaseAsyncIteratorReader):
         self._stream = stream
         self._lock = asyncio.Lock()
         self._decompressed_stream = io.BytesIO()
-        """
+        '''
         http://www.zlib.net/manual.html#Advanced
 
         windowBits can also be greater than 15 for optional gzip decoding.
         Add 32 to windowBits to enable zlib and gzip decoding with automatic
         header detection, or add 16 to decode only the gzip format
         (the zlib format will return a Z_DATA_ERROR).
-        """
+        '''
         self._decompressor = (
             zlib.decompressobj(compression_type.value + zlib.MAX_WBITS)
         )
