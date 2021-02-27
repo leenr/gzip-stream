@@ -7,8 +7,10 @@ from pathlib import Path
 import pytest
 from faker import Faker
 
-from gzip_stream import GZIPCompressedStream, AsyncGZIPDecompressedStream, \
+from gzip_stream import (
+    GZIPCompressedStream, AsyncGZIPDecompressedStream,
     BaseAsyncIteratorReader, BUFFER_SIZE
+)
 
 
 @pytest.mark.parametrize(
