@@ -26,3 +26,8 @@ steps:
     image: snakepacker/python:all
     commands:
       - tox -e py38
+
+  - name: python 3.9
+    image: snakepacker/python:all
+    commands:
+      - tox -e py39
