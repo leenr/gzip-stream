@@ -14,9 +14,9 @@ setup(
 
     url='https://github.com/leenr/gzip-stream',
     author='leenr',
-    author_email='i@leenr.ru',
+    author_email='i@leenr.me',
     maintainer='leenr',
-    maintainer_email='i@leenr.ru',
+    maintainer_email='i@leenr.me',
 
     platforms=['posix'],
     classifiers=[
