@@ -29,6 +29,7 @@ by chunks, until compressed output size will not satisfy read size.
 with zlib and gzip decompression on-the-fly
 
 .. code-block:: python
+
     # aiobotocore example
 
     import aiobotocore
