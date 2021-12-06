@@ -51,6 +51,7 @@ class FakeAsyncReader(BaseAsyncIteratorReader):
     ids=['0 bytes', '1 bytes', '4 bytes',
          'fake text - ~4 KB', 'fake text - ~256 KB']
 )
+@pytest.mark.asyncio
 async def test_gzip_aiter_async_reader(expected, tmpdir):
     tmp_file = tmpdir / 'temp.txt'
     with gzip.open(str(tmp_file), 'wb') as f:
@@ -75,6 +76,7 @@ async def test_gzip_aiter_async_reader(expected, tmpdir):
     ids=['2 bytes', '4 bytes', '8 bytes',
          '16 bytes', '1 KB']
 )
+@pytest.mark.asyncio
 async def test_buffer_gzip_async_reader(tmpdir, buff_size):
     plain_text = 'hello world' * 1000
 
