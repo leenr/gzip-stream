@@ -9,7 +9,7 @@ from typing import BinaryIO
 
 class GZIPCompressedStream(io.RawIOBase):
     def __init__(self, stream: BinaryIO, *, compression_level: int,
-                 file_name: str = None):
+                 filename: str = None):
         assert 1 <= compression_level <= 9
 
         self._compression_level = compression_level
