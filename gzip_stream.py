@@ -17,7 +17,7 @@ class GZIPCompressedStream(io.RawIOBase):
 
         self._compressed_stream = io.BytesIO()
         self._compressor = gzip.GzipFile(
-            filename=file_name,
+            filename=filename,
             mode='wb',
             fileobj=self._compressed_stream,
             compresslevel=compression_level
