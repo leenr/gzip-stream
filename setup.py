@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='gzip-stream',
-    version='1.1.0',
+    version='1.2.0',
 
     py_modules=['gzip_stream'],
     provides=['gzip_stream'],
